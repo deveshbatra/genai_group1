@@ -5,10 +5,10 @@ import openai
 from pptx import Presentation
 
 # Replace 'your_api_key_here' with your actual OpenAI API key
-openai.api_key = 'put key here'
+openai.api_key = ''
 
 from openai import OpenAI
-client = OpenAI(api_key = 'put key here')
+client = OpenAI(api_key = '')
 # Function to reword text using GPT-4
 #def reword_text_with_gpt4(text):
 #    try:
@@ -27,6 +27,8 @@ client = OpenAI(api_key = 'put key here')
 #        return text  # Return the original text if an error occurs
 
 def reword_text_with_gpt4(text, audience_type, shape_type):
+    if len(text) == 0:
+        return text
     try:
         if shape_type =="Title 1":
             title_prompt = " This is a title of a slide so keep it to less than 8 words."
@@ -86,7 +88,7 @@ def create_ppt_feedback(text, audience_type):
                     "content": (
                         "You are an assistant that provides feedback for powerpoint presentations." +
                         " I am presenting to " + audience_type + ", so make it suitable for this audience." +
-                       " Produce feedback on the following powerpoint notes and tell me how to improve it."
+                       " Produce feedback on the following powerpoint contents and tell me how to improve it."
 
                                 )
                     },
@@ -130,8 +132,9 @@ def process_presentation(
         slide_exec.placeholders[1].text = create_exec_summary(all_text, audience_type)
 
         feedback = create_ppt_feedback(all_text, audience_type)
-        with open('feedback.txt', 'w') as f:
-            f.write(feedback)
+        f = open("feedback.txt", "a")
+        f.write(feedback)
+        f.close()
     # Save the presentation
     prs.save(output_file_path)
     print(f"Presentation saved to {output_file_path}")
