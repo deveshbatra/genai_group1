@@ -8,10 +8,10 @@ from pypdf import PdfReader
 import json
 
 # Replace 'your_api_key_here' with your actual OpenAI API key
-openai.api_key = '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'
+openai.api_key = ''
 
 from openai import OpenAI
-client = OpenAI(api_key = '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')
+client = OpenAI(api_key = '')
 # Function to reword text using GPT-4
 #def reword_text_with_gpt4(text):
 #    try:
