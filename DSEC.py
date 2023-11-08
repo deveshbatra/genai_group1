@@ -124,18 +124,17 @@ with open("api_key.txt") as f:
     API_KEY = f.read()
 
 # Function to encode the image
-def encode_image(image_path):
-    with open(image_path, "rb") as image_file:
-        return base64.b64encode(image_file.read()).decode('utf-8')
+def encode_image(image_file):
+    return base64.b64encode(image_file).decode('utf-8')
 
 
-def image_feedback(image_filepath):
+def image_feedback(image_file):
     # not sure if API_KEY needs to be preovided both times
     openai.api_key = API_KEY
     client = OpenAI(api_key=API_KEY)
 
     # Getting the base64 string
-    base64_image = encode_image(image_filepath)
+    base64_image = encode_image(image_file)
 
     response = client.chat.completions.create(
         model="gpt-4-vision-preview",
@@ -155,7 +154,9 @@ def image_feedback(image_filepath):
             ],
             max_tokens=300,
             )
-    pprint(response.choices[0].message.content)
+    # pprint(response.choices[0].message.content)
+    output_string = response.choices[0].message.content
+    return output_string
 
 # Example usage
 input_file_path = "C:/Users/Administrator/Documents/GPTB4.pptx"
