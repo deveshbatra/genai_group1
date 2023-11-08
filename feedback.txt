@@ -1,0 +1,56 @@
+. An Introduction to AWS. And how we can be using it for MMM. Benefits of Cloud Computing. Trade upfront expense for variable expense.
+Benefit from massive economies of scale.
+Stop guessing capacity.
+Increase speed and agility.
+Stop spending money running and maintaining data centres.
+Go global in minutes.
+. Cloud Computing . Types of Deployment:
+Cloud Based Deployment
+All parts ran on the cloud, Existing applications migrated to the cloud, new apps designed and built on the cloud
+On-Premise Deployment
+Resources developed via virtualisation and resource management tools, increase resource utilisation using app management and virtualisation technologies
+Hybrid Deployment
+Connect cloud based resources to on premise infrastructure, integrate cloud based resources with legacy  IT infrastructure
+. Cloud Migration. At the highest level, the AWS Cloud Adoption Framework (AWS CAF) organizes guidance into six areas of focus, called Perspectives. Each Perspective addresses distinct responsibilities. The planning process helps the right people across the organization prepare for the changes ahead.
+In general, the Business, People, and Governance Perspectives focus on business capabilities, whereas the Platform, Security, and Operations Perspectives focus on technical capabilities.
+
+The Governance Perspective focuses on the skills and processes to align IT strategy with business strategy. This ensures that you maximize the business value and minimize risks.
+
+Use the Governance Perspective to understand how to update the staff skills and processes necessary to ensure business governance in the cloud. Manage and measure cloud investments to evaluate business outcomes.. General governance. . Elastic Compute Cloud - EC2. EC2 provides secure, resizable compute capacity in the cloud as Amazon EC2 instances. 
+Imagine you are responsible for the architecture of your company's resources and need to support new websites. With traditional on-premises resources, you have to do the following:
+Spend money upfront to purchase hardware.
+Wait for the servers to be delivered to you.
+Install the servers in your physical data center.
+Make all the necessary configurations.
+By comparison, with an Amazon EC2 instance you can use a virtual server to run applications in the AWS Cloud.
+You can provision and launch an Amazon EC2 instance within minutes.
+You can stop using it when you have finished running a workload.
+You pay only for the compute time you use when an instance is running, not when it is stopped or terminated.
+You can save costs by paying only for server capacity that you need or want.
+. Serverless Computing. If you have applications that you want to run in Amazon EC2, you must do the following:
+Provision instances (virtual servers).
+Upload your code.
+Continue to manage the instances while your application is running.
+
+The term “serverless” means that your code runs on servers, but you do not need to provision or manage these servers. With serverless computing, you can focus more on innovating new products and features instead of maintaining servers.
+
+Another benefit of serverless computing is the flexibility to scale serverless applications automatically. Serverless computing can adjust the applications' capacity by modifying the units of consumptions, such as throughput and memory. . AWS Lambda. AWS Lambda is a service that lets you run code without needing to provision or manage servers. 
+While using AWS Lambda, you pay only for the compute time that you consume. Charges apply only when your code is running. You can also run code for virtually any type of application or backend service, all with zero administration. 
+How AWS Lambda works
+You upload your code to Lambda. 
+You set your code to trigger from an event source, such as AWS services, mobile applications, or HTTP endpoints.
+Lambda runs your code only when triggered.
+You pay only for the compute time that you use. . Simple Storage Service- S3 Buckets. Amazon Simple Storage Service (Amazon S3) is a service that provides object-level storage. Amazon S3 stores data as objects in buckets.
+
+When you upload a file to Amazon S3, you can set permissions to control visibility and access to it. You can also use the Amazon S3 versioning feature to track changes to your objects over time.
+
+
+Amazon Elastic Block Store (Amazon EBS) is a service that provides block-level storage volumes that you can use with Amazon EC2 instances. If you stop or terminate an Amazon EC2 instance, all the data on the attached EBS volume remains available.. AWS Database services. Amazon Relational Database Service (Amazon RDS) is a service that enables you to run relational databases in the AWS Cloud.
+Amazon Aurora is an enterprise-class relational database. It is compatible with MySQL and PostgreSQL relational databases. It is up to five times faster than standard MySQL databases and up to three times faster than standard PostgreSQL databases.
+Amazon DynamoDB is a key-value database service. It delivers single-digit millisecond performance at any scale.
+Amazon Redshift is a data warehousing service that you can use for big data analytics. It offers the ability to collect data from many sources and helps you to understand relationships and trends across your data.. Rds vs flat data placehodler. . Identity and Access Manager. AWS Identity and Access Management (IAM) enables you to manage access to AWS services and resources securely.   
+
+IAM gives you the flexibility to configure access based on your company’s specific operational and security needs. You do this by using a combination of IAM features:
+IAM users, groups, and roles
+IAM policies
+Multi-factor authentication. Have a go yourself. 
