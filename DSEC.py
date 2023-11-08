@@ -1,8 +1,8 @@
 import numpy as np
 import pandas as pd
-
 import openai
 from pptx import Presentation
+from docx import Document
 
 # Replace 'your_api_key_here' with your actual OpenAI API key
 openai.api_key = ''
@@ -141,7 +141,64 @@ def process_presentation(
 
 
 
+def getText(filename):
+    doc = docx.Document(filename)
+    fullText = []
+    for para in doc.paragraphs:
+        fullText.append(para.text)
+    return '\n'.join(fullText)
 
+def document_to_ppt(doc,ppt, audience_type, slide_number):
+
+    
+    soup = bs(open(doc).read())
+    [s.extract() for s in soup(['style', 'script'])]
+    tmpText = soup.get_text()
+    text = "".join("".join(tmpText.split('\t')).split('\n')).strip()
+    print(text)
+
+    try:
+        # Use the OpenAI API to get a response
+        response = openai.chat.completions.create(
+            model="gpt-4-0613",  # Replace with the appropriate model
+            messages=[
+                {
+                    "role": "system", 
+                    "content": (
+                        "You are an assistant that provides powerpoints form word document inputs." +
+                        " I am presenting to " + audience_type + ", so convert this document into a powerpoint suitable for this audience." +
+                       "Ensure it has " + str(slide_number + 1) + " slides. The first slide is a title slide and the other slides are in the form of title and contents." +
+                       "Provide  the answer as a dictionary for python of the form {1:{'title':'title','subtitle: 'appropriate subtitle'},2:{'title':'title','contents: 'bullet pointed contents'},3:{'title':'title','contents: 'bullet pointed contents'}... etc}"
+
+                                )
+                    },
+                {"role": "user", "content": text}
+            ]
+        )
+        # Assuming the last message in the list will be the assistant's response
+        ppt_dict =  str(response.choices[0].message.content)#.text.strip()
+        print(ppt_dict)
+        prs = Presentation()
+
+        title_layout = prs.slide_layouts[0]
+        normal_layout = prs.slide_layouts[1]
+        title_slide = prs.slides.add_slide(title_layout)
+        title_slide.placeholders[0].text = ppt_dict[1]["title"]
+        title_slide.placeholders[1].text = ppt_dict[1]["subtitle"]
+
+        for i in range(2,slide_numer +1):
+            slide = prs.slides.add_slide(title_layout)
+            slide.placeholders[0].text = ppt_dict[i]["title"]
+            slide.placeholders[1].text = ppt_dict[i]["contents"]
+
+        # Save the presentation
+        prs.save(ppt)
+        print(f"Presentation saved to {ppt}")
+
+    except Exception as e:  # Catch a general exception
+        print(f"An error occurred: {e}")
+
+    
 # Example usage
 wd = "C://Users//Administrator//Documents//GitHub//genai_group1"
 import os
@@ -152,5 +209,6 @@ output_file_path_technical = "GPTA4_tech.pptx"
 output_file_path_baby = "GPTA4_babies.pptx"
 audience_type1 = "a technical audience"
 audience_type2 = "a bunch of five year olds who like thomas the tank engine"
-process_presentation(input_file_path, output_file_path_technical, audience_type1,executive_summary_slide = True)
+document_to_ppt("Singapore Day 1.docx","singapore.pptx",audience_type2, 3)
+#process_presentation(input_file_path, output_file_path_technical, audience_type1,executive_summary_slide = True)
 #process_presentation(input_file_path, output_file_path_baby, audience_type2)
