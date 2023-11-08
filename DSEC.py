@@ -120,7 +120,7 @@ Please consider:
 Respond with maximum three bullet points Each bullet point should be relevant to the slide.
 """
 
-with open("api_key.txt") as f:
+with open("gpt-4-vision-api-key.txt") as f:
     API_KEY = f.read()
 
 # Function to encode the image
